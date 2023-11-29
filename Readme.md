@@ -1,8 +1,8 @@
-### MATSim Day 
+### MATSim Day :tm
 
-*Date*: Tuesday 19th December
+Tuesday 19th December
 
-*Venue*: Center for Applied Spatial Analysis, University College London
+@ Center for Applied Spatial Analysis, University College London
 
 
 ### Aim of the day
@@ -30,6 +30,11 @@ In order to make the most of the day some prior installation is required.
 
 Install the Mamba package manager for your OS. 
 
+### Clone some repos
+
+`git clone git@github.com:arup-group/londinium.git`
+``
+
 ## Windows
 1. [Docker for Windows](https://docs.docker.com/desktop/install/windows-install/)
 2. 
@@ -39,4 +44,15 @@ Install the Mamba package manager for your OS.
 ## MacOS
 
 
-````docker run -v ~/londinium/:/working-dir columbus com.arup.cm.RunArupMatsim /working-dir/matsim/hermes_matsim_config_londinium.xml``
+Step 1: Build the Docker image for MATSim itself
+
+
+```docker build -t "casa-matsim" .```
+
+
+Step 2: go and get a cup of tea, coffee, or something stronger if Docker isn't being your friend.
+
+Step 3: a simple test run
+
+
+````docker run -v ~/londinium/:/working-dir casa-matsim com.casa.cml.RunMatsim /working-dir/matsim/hermes_matsim_config_londinium.xml``
