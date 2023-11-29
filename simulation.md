@@ -8,5 +8,6 @@ Step 2: go and get a cup of tea, coffee, or something stronger if Docker isn't b
 
 Step 3: a simple test run
 
+Assuming that Londinium is installed in your home directory (~):
 
 ``docker run -v ~/londinium/:/working-dir casa-matsim com.casa.cml.RunMatsim /working-dir/matsim/hermes_matsim_config_londinium.xml``
