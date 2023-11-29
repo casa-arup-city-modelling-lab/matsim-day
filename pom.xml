@@ -1,0 +1,319 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.casa</groupId>
+    <artifactId>matsim</artifactId>
+    <version>0.0.1</version>
+
+    <name>matsim</name>
+    <description>
+        UCL CASA MATSim
+    </description>
+
+    <repositories>
+
+        <repository>
+            <id>local-repo</id>
+            <url>file://${project.basedir}/local-mvn-repo</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+
+        <repository>
+            <id>matsim</id>
+            <url>https://repo.matsim.org/repository/matsim</url>
+        </repository>
+
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+
+        <repository>
+            <id>osgeo</id>
+            <name>OSGeo Release Repository</name>
+            <url>https://repo.osgeo.org/repository/release/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+
+    </repositories>
+
+    <dependencies>
+
+        <dependency>
+            <!-- This is the matsim "core": -->
+            <groupId>org.matsim</groupId>
+            <artifactId>matsim</artifactId>
+            <version>14.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.matsim.contrib</groupId>
+            <artifactId>multimodal</artifactId>
+            <version>14.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.matsim.contrib</groupId>
+            <artifactId>bicycle</artifactId>
+            <version>14.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.matsim.contrib</groupId>
+            <artifactId>sbb-extensions</artifactId>
+            <version>14.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.21.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.2.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>pl.pragmatists</groupId>
+            <artifactId>JUnitParams</artifactId>
+            <version>1.1.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sourceforge.pmd</groupId>
+            <artifactId>pmd</artifactId>
+            <version>6.40.0</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.hakky54</groupId>
+            <artifactId>logcaptor</artifactId>
+            <version>2.7.2</version>
+            <scope>test</scope>
+            <exclusions>
+                <!--
+                this logging translation lib causes a ClassCastException when MATSim tries to initialise
+                its logging, which makes the integration tests fail (they're runnng our controllers as applications),
+                so we must exclude it from the test classpath
+                -->
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-to-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                    <showWarnings>false</showWarnings>
+                    <showDeprecation>false</showDeprecation>
+                    <encoding>UTF-8</encoding>
+                    <!-- configure initial and maximal memory for compiling -->
+                    <fork>true</fork>
+                    <meminitial>128m</meminitial>
+                    <maxmem>512m</maxmem>
+                    <compilerArguments>
+                        <Xmaxwarns>4000</Xmaxwarns>
+                        <Xmaxerrs>100</Xmaxerrs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-classpath</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>build-classpath</goal>
+                        </goals>
+                        <configuration>
+                            <!-- <outputFile>columbus-classpath.txt</outputFile> -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <!--    Manifest was hacked using https://stackoverflow.com/questions/7051603/jai-vendorname-null/18495658#18495658-->
+                        <!--    while fixing a problem encountered when introducing the MATSim contrib bicycle module, -->
+                        <!--    due to its dependency on geotools-->
+                        <manifest>
+                            <mainClass>org.matsim.gui.MATSimGUI</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Specification-Vendor>UCL CASA</Specification-Vendor>
+                            <Implementation-Vendor>UCL CASA</Implementation-Vendor>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <configuration>
+                    <rules>
+                        <rule>
+                            <element>BUNDLE</element>
+                            <limits>
+                                <limit>
+                                    <counter>INSTRUCTION</counter>
+                                    <value>COVEREDRATIO</value>
+                                    <minimum>61%</minimum>
+                                </limit>
+                            </limits>
+                        </rule>
+                        <rule>
+                            <element>BUNDLE</element>
+                            <limits>
+                                <limit>
+                                    <counter>COMPLEXITY</counter>
+                                    <value>COVEREDRATIO</value>
+                                    <minimum>0</minimum>
+                                </limit>
+                            </limits>
+                        </rule>
+                    </rules>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>coverage-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>coverage-report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>coverage-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.13.0</version>
+                <executions>
+                    <execution>
+                        <id>pmd-scan</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
