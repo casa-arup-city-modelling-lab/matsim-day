@@ -28,31 +28,29 @@ This course assumes no prior knowledge of MATSim (or even transport related simu
 
 In order to make the most of the day some prior installation is required.
 
-Install the Mamba package manager for your OS. 
+#### Docker
 
-### Clone some repos
+[Docker for MacOS](https://docs.docker.com/desktop/install/mac-install/) (be careful with Apple vs Intel Silicon)
+
+[Docker for Windows](https://docs.docker.com/desktop/install/windows-install/)
+
+[Docker for Linux](https://docs.docker.com/desktop/install/linux-install/)
+
+#### Repositories
+
+
+Londinium - Londinium is a semi-synthetic dataset for use with MATSim agent based models.
 
 `git clone git@github.com:arup-group/londinium.git`
-``
 
-## Windows
-1. [Docker for Windows](https://docs.docker.com/desktop/install/windows-install/)
-2. 
+GeNet - Network Scenario Generator
 
-## Linux
+`git clone git@github.com:arup-group/genet.git`
 
-## MacOS
+PAM - Population Activity Modeller
 
+`git clone git@github.com:arup-group/pam.git`
 
-Step 1: Build the Docker image for MATSim itself
+Elara - A command line utility for processing (in big batches or bit by bit) MATSim XML outputs (events or plans files) into useful tabular and geospatial outputs for analysis.
 
-
-```docker build -t "casa-matsim" .```
-
-
-Step 2: go and get a cup of tea, coffee, or something stronger if Docker isn't being your friend.
-
-Step 3: a simple test run
-
-
-````docker run -v ~/londinium/:/working-dir casa-matsim com.casa.cml.RunMatsim /working-dir/matsim/hermes_matsim_config_londinium.xml``
+`git clone git@github.com:arup-group/elara.git`
