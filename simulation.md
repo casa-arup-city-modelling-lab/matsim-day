@@ -10,4 +10,9 @@ Step 3: a simple test run
 
 Assuming that Londinium is installed in your home directory (~):
 
-``docker run -v ~/londinium/:/working-dir casa-matsim com.casa.cml.RunMatsim /working-dir/matsim/hermes_matsim_config_londinium.xml``
+On Mac:
+``docker run -v ~/matsim-day/londinium/:/working-dir casa-matsim com.casa.cml.RunMatsim /working-dir/matsim/hermes_matsim_config_londinium.xml``
+
+On Windows, via WSL2:
+
+``docker run -v /home/$whoami/matsim-day/londinium/:/working-dir casa-matsim com.casa.cml.RunMatsim /working-dir/matsim/hermes_matsim_config_londinium.xml``
