@@ -2,7 +2,7 @@
 
 Tuesday 19th December
 
-@ Center for Applied Spatial Analysis, University College London
+@ Center for Advanced Spatial Analysis, University College London
 
 
 ### Aim of the day
@@ -30,27 +30,88 @@ In order to make the most of the day some prior installation is required.
 
 #### Docker
 
-[Docker for MacOS](https://docs.docker.com/desktop/install/mac-install/) (be careful with Apple vs Intel Silicon)
 
-[Docker for Windows](https://docs.docker.com/desktop/install/windows-install/)
 
-[Docker for Linux](https://docs.docker.com/desktop/install/linux-install/)
+### Setup
+
+#### Windows
+
+* Install [Docker for Windows](https://docs.docker.com/desktop/install/windows-install/)
+* Install [Windows Subsystem for Linux 2](https://learn.microsoft.com/en-us/windows/wsl/install)
+
+* Open Docker desktop
+	* Navigate to `Resources`, then `WSL integration` and toggle on `Ubuntu` (or whatever Distro of Linux you installed. 
+	* "Apply and Restart" Docker
+	* Have a cup of tea
+* Boot up Docker Desktop and ensure it is running in background. 
+
+*please* only work within WSL2, for all of our sanity! You can access the WSL2 file system by Opening Windows explorer and searching `"\\wsl$\Ubuntu\"`. Voila!
+
+#### Mac
+Congratulations on your superior choice. Most things will just work :tm
+
+* [Docker for MacOS](https://docs.docker.com/desktop/install/mac-install/) (be careful with Apple vs Intel Silicon)
+* Wait on everyone else and their faffing
+
 
 #### Repositories
 
+We will be installing a series of repositories, please install them all in one place. 
 
-Londinium - Londinium is a semi-synthetic dataset for use with MATSim agent based models.
+Depending on your git installation, you can clone these repos via HTTPs or SSH.
 
-`git clone git@github.com:arup-group/londinium.git`
+via SSH:
 
-GeNet - Network Scenario Generator
+```
+git clone git@github.com:casa-arup-city-modelling-lab/matsim-day.git
+cd matsim-day
+git clone git@github.com:arup-group/pam.git
+git clone git@github.com:arup-group/genet.git
+git clone git@github.com:arup-group/elara.git
+git clone git@github.com:arup-group/londinium.git
+```
 
-`git clone git@github.com:arup-group/genet.git`
+via HTTPS:
 
-PAM - Population Activity Modeller
+```
+git clone https://github.com/casa-arup-city-modelling-lab/matsim-day.git
+cd matsim-day
+git clone https://github.com/arup-group/pam.git
+git clone https://github.com/arup-group/genet.git
+git clone https://github.com/arup-group/elara.git
+git clone https://github.com/arup-group/londinium.git
+```
 
-`git clone git@github.com:arup-group/pam.git`
+What did I just do?
 
-Elara - A command line utility for processing (in big batches or bit by bit) MATSim XML outputs (events or plans files) into useful tabular and geospatial outputs for analysis.
+* Matsim-day - this repository! Including the actual MATSim dockerfile for running our simulation.
 
-`git clone git@github.com:arup-group/elara.git`
+* Londinium - Londinium is a semi-synthetic dataset for use with MATSim agent based models.
+
+* GeNet - Network Scenario Generator
+
+* PAM - Population Activity Modeller
+
+* Elara - A command line utility for processing (in big batches or bit by bit) MATSim XML outputs (events or plans files) into useful tabular and geospatial outputs for analysis.
+
+The end result, ideally, in your "matsim-day" directory on WSL2 or MacOS should look like this:
+
+```
+➜  matsim-day git:(main) ✗ tree -L 1
+.
+├── Dockerfile
+├── Networks.md
+├── Readme.md
+├── elara
+├── genet
+├── londinium
+├── pam
+├── pom.xml
+├── population.md
+├── simulation.md
+├── src
+├── target
+└── visualisation.md
+
+7 directories, 7 files
+```
