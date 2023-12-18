@@ -15,14 +15,14 @@ This course assumes no prior knowledge of MATSim (or even transport related simu
 | Time      | Description |
 | ----------- | ----------- |
 | 09:30-10:00 | Introductions & aims for the day |
-| 10:00-11:00 | MATSim key concepts and a little bit of theory|
-| 11:00-12:00 | InstallationFest - let's get things installed|
-| 12:00-13:00 | Lunchies (not provided, lots of options near by)|
-| 13:00-13:30 | Building a transport network|
-| 13:30-14:30 | Building a population|
+| 10:00-11:00 | MATSim key concepts and a little bit of theory |
+| 11:00-12:00 | InstallationFest - let's get things installed |
+| 12:00-13:00 | Lunchies (not provided, lots of options near by) |
+| 13:00-13:30 | Building a transport network |
+| 13:30-14:30 | Building a population |
 | 14:30-15:00 | Break|
-| 15:00-16:00 | Simulation & calibration|
-| 16:00-16:45 | Validation & output analysis|
+| 15:00-16:00 | Simulation & calibration |
+| 16:00-16:45 | Validation & output analysis |
 
 ### Preparation
 
@@ -107,11 +107,9 @@ The end result, ideally, in your "matsim-day" directory on WSL2 or MacOS should 
 ├── londinium
 ├── pam
 ├── pom.xml
-├── population.md
 ├── simulation.md
 ├── src
-├── target
 └── visualisation.md
 
-7 directories, 7 files
+6 directories, 6 files
 ```
